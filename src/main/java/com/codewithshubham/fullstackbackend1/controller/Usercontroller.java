@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewithshubham.fullstackbackend1.exception.UserNotFoundException;
-import com.codewithshubham.fullstackbackend1.model.User;
+import com.codewithshubham.fullstackbackend1.model.User1;
 import com.codewithshubham.fullstackbackend1.repository.UserRepository;
 
 @RestController
@@ -24,23 +24,23 @@ public class Usercontroller {
 	private UserRepository userrepository;
 	
 	@PostMapping("/user")
-	User newUser(@RequestBody User newUser) {
+	User1 newUser(@RequestBody User1 newUser) {
 		return userrepository.save(newUser);
 	}
 	
 	@GetMapping("/users")
-	List<User>getAllUsers(){
+	List<User1>getAllUsers(){
 		return userrepository.findAll();
 	}
 	
 	@GetMapping("/user/{id}")
-	User getUserById(@PathVariable("id") Long id) {
+	User1 getUserById(@PathVariable("id") Long id) {
 		return userrepository.findById(id)
 				.orElseThrow(()->new UserNotFoundException(id));
 		
 	}
 	@PutMapping("/user/{id}")
-	User updateUser(@RequestBody User newUser,@PathVariable Long id) {
+	User1 updateUser(@RequestBody User1 newUser,@PathVariable Long id) {
 		return userrepository.findById(id)
 				.map(user ->{
 					user.setUsername(newUser.getUsername());
