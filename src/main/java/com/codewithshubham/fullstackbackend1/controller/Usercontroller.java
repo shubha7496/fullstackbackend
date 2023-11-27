@@ -11,36 +11,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.codewithshubham.fullstackbackend1.exception.UserNotFoundException;
-import com.codewithshubham.fullstackbackend1.model.User1;
+import com.codewithshubham.fullstackbackend1.model.User;
 import com.codewithshubham.fullstackbackend1.repository.UserRepository;
 
-@Controller
-@CrossOrigin("http://localhost:3000")
+@RestController
+@CrossOrigin
 public class Usercontroller {
 	
 	@Autowired
 	private UserRepository userrepository;
 	
 	@PostMapping("/user1")
-	User1 newUser(@RequestBody User1 newUser) {
+	User newUser(@RequestBody User newUser) {
 		return userrepository.save(newUser);
 	}
 	
 	@GetMapping("/users")
-	List<User1>getAllUsers(){
+	List<User>getAllUsers(){
 		return userrepository.findAll();
 	}
 	
 	@GetMapping("/user/{id}")
-	User1 getUserById(@PathVariable("id") Long id) {
+	User getUserById(@PathVariable("id") Long id) {
 		return userrepository.findById(id)
 				.orElseThrow(()->new UserNotFoundException(id));
 		
 	}
 	@PutMapping("/user/{id}")
-	User1 updateUser(@RequestBody User1 newUser,@PathVariable Long id) {
+	User updateUser(@RequestBody User newUser,@PathVariable Long id) {
 		return userrepository.findById(id)
 				.map(user ->{
 					user.setUsername(newUser.getUsername());

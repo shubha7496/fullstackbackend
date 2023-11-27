@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class User1 {
+public class User {
 
 	@Id 
 	@GeneratedValue
@@ -40,7 +40,7 @@ public class User1 {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public User1() {
+	public User() {
 		// TODO Auto-generated constructor stub
 	}
 	
